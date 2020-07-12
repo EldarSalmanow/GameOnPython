@@ -1,5 +1,6 @@
 # импортируем класс generators(класс, для создания врагов и регистрации игроков)
 from generators import generators
+from supportClass import supportClass
 
 # созадём генератор врагов(enemies)
 obj_enemy = generators('enemy')
@@ -13,9 +14,9 @@ game = 1
 # главный цикл игры
 while game == 1:
     # цикл для задания очерёдности игроков
-    for n in range(0, obj_player.col_players):
+    for n in range(1, obj_player.col_players):
         # приём команды для определённого игрока
-        com = str(input(f"Введите команду для игрока {obj_player.lst_players_name[n]}: "))
+        com = str(input(f"Введите команду для игрока {obj_player.lst_players_name[n - 1]}: "))
         # уменьшение команды на случай, если игрок напишет большие буквы
         com.lower()
         # проверка на конец игры
@@ -27,4 +28,12 @@ while game == 1:
             # прерывание цикла
             break
         # передача команды, введённой игроком, к обьекту игрока
-        obj_player.dct_players[n + 1].inp_com(com)
+        obj_player.dct_players[n].inp_com(com)
+        # цикл проверки соприкосновения координат игрока с координатами одного из врагов
+        for i in range(1, obj_enemy.col_enemies + 1):
+            check = supportClass(obj_player.dct_players[n].x, obj_player.dct_players[n].y)
+            status = check.checkCord(obj_enemy.dct_params_enemies[i].cord_x, obj_enemy.dct_params_enemies[i].cord_y)
+            if status == "Yes":
+                pass
+            else:
+                print("Врагов не обнаружено!")

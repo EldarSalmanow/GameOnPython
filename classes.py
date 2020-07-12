@@ -40,4 +40,3 @@ class enemy:
         self.attack_enemy = attack_enemy
         self.cord_x = cord_x
         self.cord_y = cord_y
-

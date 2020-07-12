@@ -43,3 +43,5 @@ class generators:
             self.dct_params_enemies[i] = self.lst_params_enemy
             self.dct_params_enemies[i] = enemy(self.lst_params_enemy[0], self.lst_params_enemy[1],
                                                self.lst_params_enemy[2], self.lst_params_enemy[3])
+            print(self.lst_params_enemy)
+            self.lst_params_enemy = []

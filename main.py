@@ -14,7 +14,7 @@ game = 1
 # главный цикл игры
 while game == 1:
     # цикл для задания очерёдности игроков
-    for n in range(1, obj_player.col_players):
+    for n in range(1, obj_player.col_players + 1):
         # приём команды для определённого игрока
         com = str(input(f"Введите команду для игрока {obj_player.lst_players_name[n - 1]}: "))
         # уменьшение команды на случай, если игрок напишет большие буквы
@@ -31,9 +31,20 @@ while game == 1:
         obj_player.dct_players[n].inp_com(com)
         # цикл проверки соприкосновения координат игрока с координатами одного из врагов
         for i in range(1, obj_enemy.col_enemies + 1):
-            check = supportClass(obj_player.dct_players[n].x, obj_player.dct_players[n].y)
-            status = check.checkCord(obj_enemy.dct_params_enemies[i].cord_x, obj_enemy.dct_params_enemies[i].cord_y)
+            support = supportClass(obj_player.dct_players[n].x, obj_player.dct_players[n].y)
+            status = support.checkCord(obj_enemy.dct_params_enemies[i].cord_x, obj_enemy.dct_params_enemies[i].cord_y)
             if status == "Yes":
-                pass
+                lst_dct = support.attack(obj_player.dct_players, obj_enemy.dct_params_enemies, n, i)
+                obj_enemy.dct_params_enemies = lst_dct[1]
+                obj_player.dct_players = lst_dct[0]
             else:
-                print("Врагов не обнаружено!")
+                continue
+
+        if obj_player.dct_players == {}:
+            print("Вы проиграли! Игра окончена!")
+            game = 0
+            break
+        elif obj_enemy.dct_params_enemies == {}:
+            print("Вы выиграли! Игра окончена!")
+            game = 0
+            break

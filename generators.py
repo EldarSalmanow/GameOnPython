@@ -23,12 +23,16 @@ class generators:
 
     def reg_players(self):
         self.col_players = int(input("Введите количество игроков: "))
-        for i in range(1, self.col_players + 1):
-            name = str(input(f"Введите имя для {i} игрока: "))
-            self.lst_players_name.append(name)
-            self.dct_players[i] = name
-            self.dct_players[i] = player(self.dct_players[i])
-            print(f"Игрок с именем {name} успешно создан!")
+        if 3 <= self.col_players < 7:
+            for i in range(1, self.col_players + 1):
+                name = str(input(f"Введите имя для {i} игрока: "))
+                self.lst_players_name.append(name)
+                self.dct_players[i] = name
+                self.dct_players[i] = player(self.dct_players[i])
+                print(f"Игрок с именем {name} успешно создан!")
+        else:
+            print("Вы ввели слишком большое(маленькое) чилсло игроков! Введите число ещё раз.")
+            self.reg_players()
 
     def generator_enemies(self):
         for i in range(1, self.col_enemies + 1):
@@ -43,5 +47,4 @@ class generators:
             self.dct_params_enemies[i] = self.lst_params_enemy
             self.dct_params_enemies[i] = enemy(self.lst_params_enemy[0], self.lst_params_enemy[1],
                                                self.lst_params_enemy[2], self.lst_params_enemy[3])
-            print(self.lst_params_enemy)
             self.lst_params_enemy = []

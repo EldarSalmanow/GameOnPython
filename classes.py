@@ -6,6 +6,12 @@ class player:
         self.y = y
         self.health = health
 
+    def get_health(self):
+        return self.health
+
+    def set_health(self, health):
+        self.health = health
+
     def inp_com(self, com):
         move_com = ['вперёд', 'назад', 'вниз', 'вверх']
         attack_com = ['атака']
@@ -40,3 +46,9 @@ class enemy:
         self.attack_enemy = attack_enemy
         self.cord_x = cord_x
         self.cord_y = cord_y
+
+    def get_health(self):
+        return self.health
+
+    def set_health(self, health):
+        self.health = health

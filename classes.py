@@ -1,54 +1,38 @@
-# создаём класс для игрока
-class player:
-    def __init__(self, name, x=0, y=0, health=100):
-        self.name = name
+# шаблон класса для создания класса игрока и врага
+class GameObject:
+    def __init__(self, x, y, health, attack):
         self.x = x
         self.y = y
         self.health = health
+        self.attack = attack
 
-    def get_health(self):
-        return self.health
 
-    def set_health(self, health):
-        self.health = health
+# класс игрока
+class Player(GameObject):
+    def __init__(self, name):
+        super().__init__(x=0, y=0, health=100, attack=15)
+        self.name = name
 
-    def inp_com(self, com):
+    def inp_com(self):
         move_com = ['вперёд', 'назад', 'вниз', 'вверх']
-        attack_com = ['атака']
-        if com in move_com:
-            self.move(com)
-        elif com in attack_com:
-            self.attack()
+        command = str(input("Введите команду для игрока: "))
+        if command in move_com:
+            self.move(command)
         else:
-            print(f"Команды {com} не существует!")
+            print(f"Команды {command} не существует!")
 
-    def move(self, com):
-        if com == 'вперёд':
+    def move(self, command):
+        if command == 'вперёд':
             self.x += 1
-        elif com == 'назад':
+        elif command == 'назад':
             self.x -= 1
-        elif com == 'вверх':
+        elif command == 'вверх':
             self.y += 1
-        elif com == 'вниз':
+        elif command == 'вниз':
             self.y -= 1
-        self.print_pos()
-
-    def attack(self):
-        pass
-
-    def print_pos(self):
-        print(f"Игрок {self.name} передвинулся на позицию {self.x, self.y}.")
 
 
-class enemy:
-    def __init__(self, health, attack_enemy, cord_x, cord_y):
-        self.health = health
-        self.attack_enemy = attack_enemy
-        self.cord_x = cord_x
-        self.cord_y = cord_y
-
-    def get_health(self):
-        return self.health
-
-    def set_health(self, health):
-        self.health = health
+# класс врага
+class Enemy(GameObject):
+    def __init__(self, x, y, health, attack):
+        super().__init__(x, y, health, attack)

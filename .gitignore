@@ -133,3 +133,6 @@ dmypy.json
 
 # ignore IDE files
 .idea
+
+# ignore test files
+tests/

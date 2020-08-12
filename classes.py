@@ -34,5 +34,18 @@ class Player(GameObject):
 
 # класс врага
 class Enemy(GameObject):
-    def __init__(self, x, y, health, attack):
-        super().__init__(x, y, health, attack)
+    def __init__(self, x, y, level):
+        super().__init__(x, y, health=0, attack=0)
+        self.__level = level
+        self.initLevel()
+
+    def initLevel(self):
+        if self.__level == 1:
+            self.health = 40
+            self.attack = 10
+        elif self.__level == 2:
+            self.health = 60
+            self.attack = 15
+        elif self.__level == 3:
+            self.health = 80
+            self.attack = 20

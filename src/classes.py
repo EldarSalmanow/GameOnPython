@@ -45,23 +45,23 @@ class Player(GameObject):
         super().__init__(x=0, y=0, health=100, attack=15)
         self.__name = name
 
-    def inp_com(self):
-        move_com = ['вперёд', 'назад', 'вниз', 'вверх']
-        command = str(input("Введите команду для игрока: "))
-        if command in move_com:
-            self.move(command)
+    def inp_com(self, commandFromPlayer):
+        move_com = ['w', 's', 'a', 'd']
+        if commandFromPlayer in move_com:
+            self.__move(commandFromPlayer)
         else:
-            print(f"Команды {command} не существует!")
+            print(f"Команды {commandFromPlayer} не существует!")
+            print("Список доступных команд: " + str(move_com))
 
-    def move(self, command):
-        if command == 'вперёд':
-            self.__x += 1
-        elif command == 'назад':
-            self.__x -= 1
-        elif command == 'вверх':
-            self.__y += 1
-        elif command == 'вниз':
-            self.__y -= 1
+    def __move(self, commandPlayer):
+        if commandPlayer == 'w':
+            self.x += 1
+        elif commandPlayer == 's':
+            self.x -= 1
+        elif commandPlayer == 'a':
+            self.y += 1
+        elif commandPlayer == 'd':
+            self.y -= 1
 
     @property
     def name(self):

@@ -19,7 +19,7 @@ while statusGame:
     # игровой процесс
     for step in range(0, len(players)):
         command = str(input(f"Введите команду для игрока {players[step].name}: "))
-        pass
+        players[step].inp_com()
     # вопрос для игроков о том, закончить ли игру досрочно
     if iteration % 7 == 0:
         commandGame = int(input("Если хотите закончить игру, напишите '0', если продолжить, напишите '1': "))

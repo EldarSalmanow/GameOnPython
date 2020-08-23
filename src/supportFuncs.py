@@ -1,5 +1,3 @@
-from src.classes import Player, Enemy
-
 # импорт доп. модулей
 import time
 
@@ -36,5 +34,3 @@ def checkHealth(gameObject):
     else:
         return False
 
-
-attack(Player('eldar'), Enemy(0, 0, 1))

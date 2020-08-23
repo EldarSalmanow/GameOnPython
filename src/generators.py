@@ -20,9 +20,22 @@ def genPlayers():
 def genEnemies():
     lstEnemies = []
     colEnemies = random.randint(3, 7)
-    for col in range(1, colEnemies + 1):
+    # списки для проверки на совпадение координат при генерации
+    xLst = []
+    yLst = []
+    # генерация
+    enemy = True
+    while enemy:
         x = random.randint(-15, 15)
+        if x in xLst:
+            continue
+        xLst.append(x)
         y = random.randint(-15, 15)
+        if y in yLst:
+            continue
+        yLst.append(y)
         level = random.randint(1, 3)
         lstEnemies.append(Enemy(x, y, level))
+        if len(lstEnemies) == colEnemies:
+            enemy = False
     return lstEnemies

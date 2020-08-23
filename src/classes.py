@@ -42,7 +42,7 @@ class GameObject:
 # класс игрока
 class Player(GameObject):
     def __init__(self, name):
-        super().__init__(x=0, y=0, health=100, attack=15)
+        super().__init__(0, 0, 100, 15)
         self.__name = name
 
     def inp_com(self, commandFromPlayer):
@@ -75,7 +75,7 @@ class Player(GameObject):
 # класс врага
 class Enemy(GameObject):
     def __init__(self, x, y, level):
-        super().__init__(x, y, health=0, attack=0)
+        super().__init__(x, y, 0, 0)
         self.__level = level
         self.__initLevel()
 

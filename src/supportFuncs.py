@@ -8,6 +8,8 @@ def attack(player, enemy):
           "Вот краткие характеристики монстра:\n"
           f"Уровень: {enemy.level}")
     battle = True
+    # переменная, возвращаемая из функции для определения победителя
+    winner = False
     while battle:
         step = True
         while step:
@@ -15,17 +17,21 @@ def attack(player, enemy):
             time.sleep(2.0)
             print(f"Монстр атаковал игрока {player.name}! У него осталось {player.health} жизней!")
             if checkHealth(player):
-                print(f"Битва окончена! Игрок {player.name} победил монстра!")
+                print(f"Битва окончена! Монстр победил игрока {player.name}!")
+                print(f"Игрок {player.name} выбывает из игры!")
+                winner = 'enemy'
                 battle = False
                 break
             enemy.health = enemy.health - player.attack
             time.sleep(2.0)
             print(f"Игрок {player.name} атаковал монстра! У монстра осталось {enemy.health} жизней!")
             if checkHealth(enemy):
-                print(f"Битва окончена! Монстр победил игрока {player.name}!")
+                print(f"Битва окончена! Игрок {player.name} победил монстра!")
+                winner = 'player'
                 battle = False
                 break
             step = False
+    return winner
 
 
 def checkHealth(gameObject):

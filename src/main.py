@@ -7,6 +7,31 @@ from src.supportFuncs import attack
 # импорт доп. модулей
 import time
 
+
+# проверка количества игроков и врагов
+def checkColEnemiesAndPlayers():
+    if len(enemies) <= 0:
+        print("Поздравляю!!!")
+        time.sleep(2.0)
+        print("Игра окончена! Игроки победили всех монстров!")
+        time.sleep(2.0)
+        print("Спсаибо, что сыграли в эту игру.")
+        print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
+        return 'end'
+    elif len(players) <= 0:
+        time.sleep(2.0)
+        print("Увы, вы проиграли...")
+        time.sleep(2.0)
+        print("Монстры убили всех игроков...")
+        time.sleep(2.0)
+        print("Конец!!!")
+        time.sleep(2.0)
+        print("Спсаибо, что сыграли в эту игру.")
+        print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
+        return 'end'
+    return 'notEnd'
+
+
 # регистрация игроков
 players = genPlayers()
 
@@ -23,44 +48,34 @@ iteration = 0
 while statusGame:
     iteration += 1
     for step in range(0, len(players)):
-        if players[step] == 'null':
+        # пропуск игроков помеченных флагом 'null'
+        if players[step].flag == 'null':
             continue
         command = str(input(f"Введите команду для игрока {players[step].name}: "))
         players[step].inp_com(command)
         # проверка на совпадение координат игрока и врага
         check = True
-        colEnemy = 0
+        enemyIndex = 0
         while check:
-            if enemies[colEnemy] == 'null':
-                colEnemy += 1
+            if enemies[enemyIndex].flag == 'null':
+                enemyIndex += 1
                 continue
-            if players[step].x == enemies[colEnemy].x and players[step].y == enemies[colEnemy].y:
+            # если координаты врага и координаты игрока совпали, начать битву
+            if players[step].x == enemies[enemyIndex].x and players[step].y == enemies[enemyIndex].y:
                 check = False
-                win = attack(players[step], enemies[colEnemy])
+                win = attack(players[step], enemies[enemyIndex])
+                # пометка флагом 'null' в зависимости от того, кто выиграл
                 if win == 'player':
-                    enemies[colEnemy] = 'null'
+                    enemies[enemyIndex].flag = 'null'
                 elif win == 'enemy':
-                    players[step] = 'null'
-            if colEnemy >= len(enemies) - 1:
+                    players[step].flag = 'null'
+            if enemyIndex > len(enemies):
                 check = False
-            colEnemy += 1
-            if len(enemies) <= 0:
-                print("Поздравляю!!!")
-                time.sleep(2.0)
-                print("Игра окончена! Игроки победили всех монстров!")
-                time.sleep(2.0)
-                print("Спсаибо, что сыграли в эту игру.")
-                print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
-            elif len(players) <= 0:
-                time.sleep(2.0)
-                print("Увы, вы проиграли...")
-                time.sleep(2.0)
-                print("Монстры убили всех игроков...")
-                time.sleep(2.0)
-                print("Конец!!!")
-                time.sleep(2.0)
-                print("Спсаибо, что сыграли в эту игру.")
-                print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
+            enemyIndex += 1
+            # проверка количества игроков и врагов
+            status = checkColEnemiesAndPlayers()
+            if status == 'end':
+                statusGame = False
 
     # вопрос для игроков о том, закончить ли игру досрочно
     if iteration % 7 == 0:

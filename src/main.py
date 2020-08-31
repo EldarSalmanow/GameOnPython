@@ -15,7 +15,7 @@ def checkColEnemiesAndPlayers():
         time.sleep(2.0)
         print("Игра окончена! Игроки победили всех монстров!")
         time.sleep(2.0)
-        print("Спсаибо, что сыграли в эту игру.")
+        print("Спасибо, что сыграли в эту игру.")
         print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
         return 'end'
     elif len(players) <= 0:
@@ -26,7 +26,7 @@ def checkColEnemiesAndPlayers():
         time.sleep(2.0)
         print("Конец!!!")
         time.sleep(2.0)
-        print("Спсаибо, что сыграли в эту игру.")
+        print("Спасибо, что сыграли в эту игру.")
         print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
         return 'end'
     return 'notEnd'

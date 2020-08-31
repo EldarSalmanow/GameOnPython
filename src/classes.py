@@ -5,6 +5,7 @@ class GameObject:
         self.__y = y
         self.__health = health
         self.__attack = attack
+        self.__flag = 'notNull'
 
     @property
     def x(self):
@@ -37,6 +38,14 @@ class GameObject:
     @attack.setter
     def attack(self, attack):
         self.__attack = attack
+
+    @property
+    def flag(self):
+        return self.__flag
+
+    @flag.setter
+    def flag(self, flag):
+        self.__flag = flag
 
 
 # класс игрока

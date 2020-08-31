@@ -60,22 +60,23 @@ while statusGame:
             if enemies[enemyIndex].flag == 'null':
                 enemyIndex += 1
                 continue
-            # если координаты врага и координаты игрока совпали, начать битву
-            if players[step].x == enemies[enemyIndex].x and players[step].y == enemies[enemyIndex].y:
-                check = False
-                win = attack(players[step], enemies[enemyIndex])
-                # пометка флагом 'null' в зависимости от того, кто выиграл
-                if win == 'player':
-                    enemies[enemyIndex].flag = 'null'
-                elif win == 'enemy':
-                    players[step].flag = 'null'
-            if enemyIndex > len(enemies):
-                check = False
-            enemyIndex += 1
-            # проверка количества игроков и врагов
-            status = checkColEnemiesAndPlayers()
-            if status == 'end':
-                statusGame = False
+            else:
+                # если координаты врага и координаты игрока совпали, начать битву
+                if players[step].x == enemies[enemyIndex].x and players[step].y == enemies[enemyIndex].y:
+                    check = False
+                    win = attack(players[step], enemies[enemyIndex])
+                    # пометка флагом 'null' в зависимости от того, кто выиграл
+                    if win == 'player':
+                        enemies[enemyIndex].flag = 'null'
+                    elif win == 'enemy':
+                        players[step].flag = 'null'
+                if enemyIndex >= len(enemies) - 1:
+                    check = False
+                enemyIndex += 1
+                # проверка количества игроков и врагов
+                status = checkColEnemiesAndPlayers()
+                if status == 'end':
+                    statusGame = False
 
     # вопрос для игроков о том, закончить ли игру досрочно
     if iteration % 7 == 0:

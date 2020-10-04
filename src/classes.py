@@ -1,3 +1,7 @@
+from src.exceptions import GameTypeException
+from src.items import Types
+
+
 # шаблон класса для создания класса игрока и врага
 class GameObject:
     def __init__(self, x, y, health, attack):
@@ -5,7 +9,7 @@ class GameObject:
         self.__y = y
         self.__health = health
         self.__attack = attack
-        self.__flag = 'notNull'
+        self.__flag = True
 
     @property
     def x(self):
@@ -53,6 +57,7 @@ class Player(GameObject):
     def __init__(self, name):
         super().__init__(0, 0, 100, 15)
         self.__name = name
+        self.__inventory = Inventory()
 
     def inp_com(self, commandFromPlayer):
         move_com = ['w', 's', 'a', 'd']
@@ -79,6 +84,33 @@ class Player(GameObject):
     @name.setter
     def name(self, name):
         self.__name = name
+
+
+# класс инвенторя игрока
+class Inventory:
+    def __init__(self):
+        self.__size = 5
+        self.__items = []
+
+    # def addItem(self, type, subtype, col=0):
+    #     if type in Types:
+    #         typeOfItem = Types.CONSUMABLES
+    #     else:
+    #         raise GameTypeException("Типа '" + type + "' не существует!")
+
+
+# класс элемента для использования игроком
+class Item:
+    # конструктор для оружия
+    def __init__(self, typeOfWeapon):
+        self.__itemType = Types.WEAPON
+        self.__typeOfWeapon = typeOfWeapon
+
+    # конструктор для всяких расходников
+    def __init(self, typeOfСonsumable, col):
+        self.__itemType = Types.CONSUMABLE
+        self.__typeOfСonsumable = typeOfСonsumable
+        self.__col = col
 
 
 # класс врага

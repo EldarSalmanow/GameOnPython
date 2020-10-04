@@ -17,7 +17,7 @@ def checkColEnemiesAndPlayers():
         time.sleep(2.0)
         print("Спасибо, что сыграли в эту игру.")
         print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
-        return 'end'
+        return True
     elif len(players) <= 0:
         time.sleep(2.0)
         print("Увы, вы проиграли...")
@@ -28,8 +28,8 @@ def checkColEnemiesAndPlayers():
         time.sleep(2.0)
         print("Спасибо, что сыграли в эту игру.")
         print("Ссылка на исходный код: https://github.com/EldarSalmanow/GameOnPython")
-        return 'end'
-    return 'notEnd'
+        return True
+    return False
 
 
 # регистрация игроков
@@ -49,7 +49,7 @@ while statusGame:
     iteration += 1
     for step in range(0, len(players)):
         # пропуск игроков помеченных флагом 'null'
-        if players[step].flag == 'null':
+        if not players[step].flag:
             continue
         command = str(input(f"Введите команду для игрока {players[step].name}: "))
         players[step].inp_com(command)
@@ -57,7 +57,7 @@ while statusGame:
         check = True
         enemyIndex = 0
         while check:
-            if enemies[enemyIndex].flag == 'null':
+            if not enemies[enemyIndex].flag:
                 enemyIndex += 1
                 continue
             else:
@@ -67,15 +67,15 @@ while statusGame:
                     win = attack(players[step], enemies[enemyIndex])
                     # пометка флагом 'null' в зависимости от того, кто выиграл
                     if win == 'player':
-                        enemies[enemyIndex].flag = 'null'
+                        enemies[enemyIndex].flag = False
                     elif win == 'enemy':
-                        players[step].flag = 'null'
+                        players[step].flag = False
                 if enemyIndex >= len(enemies) - 1:
                     check = False
                 enemyIndex += 1
                 # проверка количества игроков и врагов
                 status = checkColEnemiesAndPlayers()
-                if status == 'end':
+                if status:
                     statusGame = False
 
     # вопрос для игроков о том, закончить ли игру досрочно

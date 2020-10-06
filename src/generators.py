@@ -1,5 +1,6 @@
 # импорт классов игрока и врага
-from src.classes import Player, Enemy
+from src.Classes.GameClass.Player import Player
+from src.Classes.GameClass.Enemy import Enemy
 
 # импорт доп. модулей из стандартной библиотеки
 import random

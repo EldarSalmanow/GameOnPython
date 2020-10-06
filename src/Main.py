@@ -2,7 +2,7 @@
 from src.generators import genPlayers, genEnemies
 
 # импорт функции атаки
-from src.supportFuncs import attack
+from src.SupportFuncs import attack
 
 # импорт доп. модулей
 import time

@@ -39,4 +39,3 @@ def checkHealth(gameObject):
         return True
     else:
         return False
-

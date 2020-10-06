@@ -1,5 +1,5 @@
 # импорт генераторов
-from src.generators import genPlayers, genEnemies
+from src.Generators import genPlayers, genEnemies
 
 # импорт функции атаки
 from src.SupportFuncs import attack
